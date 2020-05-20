@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var prev = document.getElementById("prev");
+            var next = document.getElementById("next");
+            var img = document.getElementById("imgs");
+            var imgArr = ["img/1.jpg", "img/2.jpg"]
+            var index = 0;
+            var amount = document.getElementById("amount");
+            amount.innerHTML = (index + 1) + "/" + imgArr.length;
+            prev.onclick = function () {
+                index--;
+                if (index < 0) {
+                    index = imgArr.length - 1;
+                }
+                img.src = imgArr[index];
+                amount.innerHTML = (index + 1) + "/" + imgArr.length;
+
+            }
+
+            next.onclick = function () {
+                index++;
+                if (index >= 2) {
+                    index = 0;
+                }
+                img.src = imgArr[index];
+                amount.innerHTML = (index + 1) + "/" + imgArr.length;
+
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .total {
+            width: 500px;
+            margin: 0 auto;
+            background: #7fecad;
+            text-align: center;
+        }
+
+        .img {
+            width: 500px;
+            position: relative;
+        }
+
+        #amount {
+            z-index: 999;
+            color: white;
+            position: absolute;
+            top: 263px;
+            left: 305px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="total">
+        <img id="imgs" class="img" src="img/1.jpg" alt="图片">
+        <div id="amount"></div>
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+
+</body>
+
+</html>

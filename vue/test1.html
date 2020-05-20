@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="username">
+        <p>Hello {{username}}</p>
+        <img :src="imgUrl" style="height: 500px; width: 600px;">
+        <br>
+        <button v-on:click="btn01">按钮1</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                username: 'Vue!',
+                imgUrl: 'https://w.wallhaven.cc/full/j5/wallhaven-j5pe1p.jpg'
+            },
+            methods: {
+                btn01() {
+                    alert('btn01');
+                }
+            },
+        })
+    </script>
+    
+</body>
+</html>
+
+
+

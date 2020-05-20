@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <span>姓:</span>
+        <input type="text" placeholder="FirstName" v-model="FirstName"><br>
+        <span>名:</span>
+        <input type="text" placeholder="LastName" v-model="LastName"><br>
+        <span>姓名1(单向):</span>
+        <input type="text" placeholder="FullName1" v-model="FullName1"><br>
+        <span>姓名2(单向):</span>
+        <input type="text" placeholder="FullName2" v-model="FullName2"><br>
+        <span>姓名3(双向):</span>
+        <input type="text" placeholder="FullName3" v-model="FullName3"><br>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    FirstName: 'A',
+                    LastName: 'B',
+                    FullName2: '',
+                }
+            },
+            computed: {
+                FullName1() {
+                    return this.FirstName + ' ' +this.LastName
+                },
+
+                FullName3: {
+                    get() {
+                        return this.FirstName + ' ' +this.LastName;
+                    },
+
+                    //监事当前属性的变化，当前属性发生改变时回调，更新相关的属性数据
+                    set(value) {
+                        var name = value.split(' ');
+                        this.FirstName = name[0];
+                        this.LastName = name[1];
+                    }
+                }
+            },
+            watch: {
+                FirstName(value) {
+                    console.log(2);
+                    this.FullName2 = value + ' ' + this.LastName;
+                },
+                // LastName(value) {
+                //     this.FullName2 = this.FirstName + ' ' + value;
+                // }
+            }
+        })
+        vm.$watch('LastName', function(value) {
+            this.FullName2 = this.FirstName + ' ' + value;
+        })
+    </script>
+</body>
+</html>

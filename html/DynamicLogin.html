@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态登陆框</title>
+    <link rel="stylesheet" href="../css/DynamicLogin.css">
+    <script src="../jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1594585_76ht1h30g5h.css">
+</head>
+
+<body>
+
+    <div class="show-login-btn">
+        <i class="icon iconfont iconlogin"> Show Login Form</i>
+    </div>
+
+
+    <div class="login-box">
+        <div class="hide-login-btn">
+            <i class="icon iconfont iconcha"></i>
+        </div>
+        <form class="login-form" action="DynamicLanding.html" method="POST">
+            <h1>Welcome</h1>
+            <input class="txtb" type="text" name="" placeholder="Username">
+            <input class="txtb" type="password" name="" placeholder="Password">
+            <input class="login-btn" type="button" name="" value="Login">
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(".show-login-btn").on("click", function () {
+            $(".login-box").toggleClass("showed");
+        });
+
+        $(".hide-login-btn").on("click", function () {
+            $(".login-box").toggleClass("showed");
+        });
+
+        $('.login-btn').on('click',function() {
+            window.location.href = "Layered.html"
+            // $(location).attr("href", "Layered.html");
+        })
+
+    </script>
+
+</body>
+
+</html>

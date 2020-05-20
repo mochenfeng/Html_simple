@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var arr = [34, 77, 2, 4, 6, 1, -1];
+            var btn01 = document.getElementById("btn01");
+            btn01.onclick = function () {
+                for (var i = 0; i < arr.length; i++) {
+                    arr.sort(function (a, b) {
+                        return a - b;
+                    })
+                    console.log(arr[i]);
+                }
+            }
+            var btn02 = document.getElementById("btn02");
+            btn02.onclick = function () {
+                for (var i = 0; i < arr.length; i++) {
+                    arr.sort(function (a, b) {
+                        return b - a;
+                    })
+                    console.log(arr[i]);
+                }
+            }
+
+            for (var i = 0; i < arr.length; i++) {
+                var i = document.createElement("p");
+                i.innerHTML = arr[i];
+                console.log(i.innerHTML);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <button id="btn01">升序</button>
+        <button id="btn02">降序</button>
+    </div>
+</body>
+
+</html>

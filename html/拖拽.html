@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            left: 250px;
+            top: 450px;
+            background: black;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var box1 = document.getElementById("box1");
+            var box2 = document.getElementById("box2");
+            
+
+            function darg(obj) {
+                obj.onmousedown = function (event) {
+
+                var ol = event.clientX - obj.offsetLeft;
+                var ot = event.clientY - obj.offsetTop;
+
+                document.onmousemove = function (event) {
+                event = event || window.event;
+                var left = event.clientX - ol;
+                var top = event.clientY - ot;
+
+                obj.style.left = left + "px";
+                obj.style.top = top + "px";
+
+                }
+
+                obj.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+                }
+                }
+            }
+            darg(box1);
+            darg(box2);
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+</body>
+
+</html>

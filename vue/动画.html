@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        /* 显示的过渡效果*/
+        .xxx-enter-active {
+            transition: all 2.5s;
+        }
+
+
+        /*隐藏的过渡效果*/
+        .xxx-leave-active {
+            transition: all 0.5s;
+        }
+        
+         /* 隐藏时的过渡效果*/
+        .xxx-enter, .xxx-leave-to {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="demo">
+        <button @click="isShow= !isShow">显示隐藏1</button>
+        <transition name="xxx">
+            <p v-if="isShow">hello</p>
+        </transition>
+
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#demo",
+            data() {
+                return {
+                    isShow: true
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        .aClass {
+            color: red;
+        }
+
+        .bClass {
+            color: green;
+        }
+
+        .cClass {
+            font-size: 40px;
+        }
+
+        .dClass {
+            font-weight:900
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="demo">
+        <h1>1. Class绑定: class='xxxx'</h1>
+        <p class="cClass" v-bind:class="a">Class绑定字符串形式</p>
+        <p v-bind:class="{bClass: isB, cClass:isC}">Class绑定对象形式</p>
+        <p v-bind:class="['aClass', 'cClass', 'dClass']">Class绑定数组形式</p>
+        <h2>2. Style绑定</h2>
+        <p :style="{color: aciveColor, fontSize: fontsize + 'px'}">Style绑定</p>
+        <button @click="update">更新</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data() {
+                return {
+                    a: 'aClass',
+                    isB: true,
+                    isC: true,
+                    aciveColor: 'lightblue',
+                    fontsize: 60,
+                }
+            },
+            methods: {
+                update() {
+                    this.a = 'bClass',
+                    this.isC = false
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

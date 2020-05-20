@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var myClick = function (strId, fun) {
+            var btn = document.getElementsByName(strId);
+            strId.onclick = fun;
+        }
+
+        window.onload = function () {
+            // var checkedAllBtn = document.getElementById("checkedAllBtn");
+            // checkedAllBtn.onclick = function() {
+            //     var items = document.getElementsByName("items");
+            //     items.forEach((value, index) => {
+            //         items[index].checked = true;
+            //     });
+            // }
+            myClick(checkedAllBtn, function () {
+                var items = document.getElementsByName("items");
+                items.forEach((value, index) => {
+                    items[index].checked = true;
+                });
+            })
+
+            myClick(checkedNoBtn, function () {
+                var items = document.getElementsByName("items");
+                items.forEach((value, index) => {
+                    items[index].checked = false;
+                });
+            })
+
+            myClick(checkedRevBtn, function () {
+                var items = document.getElementsByName("items");
+                items.forEach((value, index) => {
+                    if (items[index].checked == true) {
+                        items[index].checked = false;
+                    } else {
+                        items[index].checked = true;
+                    }
+                });
+            })
+
+            myClick(sendBtn, function () {
+                var items = document.getElementsByName("items");
+                items.forEach((value, index) => {
+                    if (items[index].checked == true) {
+                       alert(items[index].value);
+                    } 
+                });
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <form method="POST" action="">
+        <div>你爱好的运动是?</div>
+        <input type="checkbox" name="items" value="足球">足球
+        <input type="checkbox" name="items" value="篮球">篮球
+        <input type="checkbox" name="items" value="羽毛球">羽毛球
+        <input type="checkbox" name="items" value="乒乓球">乒乓球
+        <br>
+        <input type="button" id="checkedAllBtn" value="全 选">
+        <input type="button" id="checkedNoBtn" value="全不选">
+        <input type="button" id="checkedRevBtn" value="反 选">
+        <input type="button" id="sendBtn" value="提 交">
+
+    </form>
+</body>
+
+</html>

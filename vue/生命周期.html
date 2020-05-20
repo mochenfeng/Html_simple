@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <div id="demo">
+        <button @click="destoryVm">destory Vue</button>
+        <button @click="createVm">开始刷新</button>
+        <p v-show="isShow">Vue生命周期mounted</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data() {
+                return {
+                    isShow: true
+                }
+            },
+            mounted() {  // 初始化显示之后立即调用(1次)
+                //----匿名函数
+                // that = this
+                // setInterval(function() {
+                //     that.isShow = !that.isShow;
+                // }, 1000)
+
+                //箭头函数
+               this.IntervalId = setInterval(() => {
+                    console.log('----')
+                    this.isShow = !this.isShow;
+                }, 1000)
+            },
+
+            beforeDestroy() { // 死亡之前调用(1次)
+                clearInterval(this.IntervalId);
+            },
+
+            methods: {
+                destoryVm() {
+                    vm.$destroy();
+                    // clearInterval(this.IntervalId);
+                },
+
+                createVm() {
+                    // this.IntervalId = setInterval(() => {
+                    //     this.isShow = !this.isShow;
+                    // }, 1000)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

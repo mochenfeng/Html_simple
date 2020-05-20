@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <div id="demo">
+        <h2>1.绑定监听</h2>
+        <button @click="test1">test1</button>
+        <button @click="test2(123)">test2</button>
+        <button @click="test3">test3</button>
+        <button @click="test4(456,$event)">test4</button>
+        <h2>2.事件修饰符</h2>
+        <div style="height: 200px; width: 200px; background: red" @click="test5"> 
+            <div style="height: 100px; width: 100px; background: blueviolet" @click.stop="test6"></div>
+        </div>
+        <a href="http://www.baidu.com" @click.prevent="test7">百度</a>
+        <h2>3.按键修饰符</h2>
+        <input type="text" @keyup.enter="test8" placeholder="请按下Enter">
+        <input type="text" @keyup.space="test8" placeholder="请按下空格键">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data() {
+                return {
+                    
+                }
+            },
+            methods: {
+                test1() {
+                    alert('test1');
+                },
+                test2(message) {
+                    alert(message);
+                },
+                test3(event) {
+                    alert(event.target.innerHTML);
+                },
+                test4(message, event) {
+                    alert(message + ' ' + event.target.innerHTML);
+                },
+
+                test5() {
+                    alert('out');
+                },
+
+                test6() {
+                    alert('inner');
+                },
+
+                test7() {
+                    alert('百度一下');
+                },
+
+                test8(event) {
+                    alert(event.target.value);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

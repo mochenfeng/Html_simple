@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="demo">
+        <h2>测试：v-for 遍历数组</h2>
+        <ul>
+            <li v-for="(person, index) in persons" :key="index">
+                {{person.name}}----------{{person.age}}
+                <button @click="update(index, {name: 'Cat', age: 12})">更新</button>
+                <button @click="deleteP(index)">删除</button>
+            </li>
+            <button @click="add(0, {name: 'MCF', age: 21})">增加</button>
+        </ul>
+        <h2>测试：v-for 遍历对象</h2>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data() {
+                return {
+                    persons: [
+                        {name: 'Bob', age: 18},
+                        {name: 'Jack', age: 15},
+                        {name: 'Tom', age: 22},
+                        {name: 'Roes', age: 19}
+                    ]
+                }
+            },
+            methods: {
+                deleteP(index) {
+                    this.persons.splice(index,1);
+                },
+                
+                update(index, newP) {
+                    // this.persons[index] = newP;
+                    this.persons.splice(index,1,newP)
+                    console.log(this.persons);
+                },
+
+                add(index, newP) {
+                    this.persons.splice(index,0,newP);
+                }
+            },
+        })
+    </script>
+</body>
+</html>
