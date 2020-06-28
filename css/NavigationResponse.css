@@ -16,7 +16,7 @@ body {
     height: 100vh;
     font-family: Poppins;
     font-weight: 400;
-    background: url(../images/preview.jpg);
+    background: url(../images/2.jpg);
     background-position: center;
     background-size: cover;
 }
@@ -25,11 +25,20 @@ nav {
     padding: 8px;
 }
 
+/* .container {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/阳光少女.jpg');
+    background-image: inherit;
+    background-repeat:no-repeat;
+} */
+
 .logo {
     float: left;
     padding: 8px;
     margin-left: 16px;
     margin-top: 8px;
+
 }
 
 .logo a {
@@ -39,10 +48,13 @@ nav {
     font-size: 18px;
     letter-spacing: 0px;
     text-decoration: none;
+    /* background:hsla(0 ,0% ,100%,.3); */
+
 }
 
 nav ul {
     float: right;
+    background:hsla(0 ,0% ,100%,.3);
 }
 
 nav ul li {
@@ -69,6 +81,7 @@ nav ul li a {
 }
 
 @media screen and (max-width: 864px) {
+
     .logo {
         padding: 0;
     }
@@ -83,6 +96,9 @@ nav ul li a {
         background: #fff;
         opacity: 0;
         transform: all 0.2s ease;
+        background: url(../images/sunGirl.jpg);
+        background-position: center;
+        background-size: cover;
     }
 
     .nav-wrapper ul {

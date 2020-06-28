@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/Css轮播图.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1908401_43pvve54ymp.css">
+    <script src="../js/move.js"></script>
+    <script>
+        window.onload = function () {
+            //索引
+            var index = 0
+
+            var left = document.getElementById("left")
+            var right = document.getElementById("right")
+            var r = document.getElementsByClassName("r")
+
+            var selectAll = document.getElementsByClassName("bar")
+            selectAll[index].style.background = "#fff"
+
+            for (var i = 0; i < selectAll.length; i++) {
+
+                selectAll[i].num = i;
+
+                selectAll[i].onclick = function () {
+
+                    //获取点击的索引
+                    index = this.num
+                    setA(selectAll[index])
+
+                }
+
+                left.onclick = function () {
+                    index--
+                    if(index < 0) {
+                        index = 4
+                    }
+                    setA(selectAll[index])
+                    r[index].checked = true
+                }
+
+                right.onclick = function () {
+                    index++
+                    if(index > 4) {
+                        index = 0
+                    }
+                    setA(selectAll[index])
+                    r[index].checked = true
+                }
+            }
+
+            //创建一个方法用来设置选中
+            function setA(obj) {
+
+                for (var i = 0; i < selectAll.length; i++) {
+                    selectAll[i].style.background = ""
+                }
+
+                obj.style.background = "#fff"
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="auto" class="slidershow middle">
+        <div id="imgList" class="slides">
+
+            <input class="r" type="radio" name="r" id="r1" checked>
+            <input class="r" type="radio" name="r" id="r2">
+            <input class="r" type="radio" name="r" id="r3">
+            <input class="r" type="radio" name="r" id="r4">
+            <input class="r" type="radio" name="r" id="r5">
+
+
+            <div class="slide s1">
+                <img src="../images/2.jpg" alt="">
+            </div>
+            <div class="slide">
+                <img src="../images/5.jpg" alt="">
+            </div>
+            <div class="slide">
+                <img src="../images/sunGirl.jpg" alt="">
+            </div>
+            <div class="slide">
+                <img src="../images/10.jpg" alt="">
+            </div>
+            <div class="slide">
+                <img src="../images/4.png" alt="">
+            </div>
+        </div>
+
+        <div class="navigation">
+            <label for="r1" class="bar"></label>
+            <label for="r2" class="bar"></label>
+            <label for="r3" class="bar"></label>
+            <label for="r4" class="bar"></label>
+            <label for="r5" class="bar"></label>
+        </div>
+
+
+        <div id="left">
+            <i class="iconfont iconleft" style="font-size: 50px;"></i>
+        </div>
+        <div id="right">
+            <i class="iconfont iconright" style="font-size: 50px;"></i>
+        </div>
+    </div>
+</body>
+
+</html>

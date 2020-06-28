@@ -54,3 +54,11 @@ a {
     width: 0px;
 }
 
+@media screen and (max-width: 864px) { 
+    .search-box:hover > .search-btn {
+        background: white;
+        margin-top: -40px;
+    }
+    
+}
+

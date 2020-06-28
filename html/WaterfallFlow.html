@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀑布流</title>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <script src="../js/lazyload-2.x/lazyload.min.js"></script>
+    <style>
+        .waterfall {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .waterfall img {
+            width: 100px;
+            /* 绝对定位实现瀑布流布局 */
+            position: absolute;
+            margin: 5px;
+            /* 给图片重新排列加上动画效果 */
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="waterfall">
+        <img src="../images/1.jpg" alt="300*200">
+        <img src="../images/2.jpg" alt="400*200">
+        <img src="../images/3.jpg" alt="300*150">
+        <img src="../images/4.jpg" alt="300*250">
+        <img src="../images/5.jpg" alt="300*80">
+        <img src="../images/6.jpg" alt="300*90">
+        <img src="../images/7.jpg" alt="300*120">
+        <img src="../images/8.jpg" alt="300*180">
+        <img src="../images/sunGirl.jpg" alt="300*100">
+        <img src="../images/1.jpg" alt="400*300">
+        <img src="../images/2.jpg" alt="400*200">
+        <img src="../images/3.jpg" alt="300*150">
+        <img src="../images/4.jpg" alt="300*250">
+        <img src="../images/5.jpg" alt="300*80">
+        <img src="../images/6.jpg" alt="300*90">
+        <img src="../images/7.jpg" alt="300*120">
+        <img src="../images/8.jpg" alt="300*180">
+        <img src="../images/sunGirl.jpg" alt="300*100">
+        <img src="https://picsum.photos/360/460?random=1" alt="300*200">
+        <img src="https://picsum.photos/360/460?random=2" alt="400*200">
+        <img src="https://picsum.photos/360/460?random=3" alt="300*150">
+        <img src="https://picsum.photos/360/460?random=4" alt="300*250">
+        <img src="https://picsum.photos/360/460?random=5" alt="300*80">
+        <img src="https://picsum.photos/360/460?random=6" alt="300*90">
+        <img src="https://picsum.photos/360/460?random=7" alt="300*120">
+        <img src="https://picsum.photos/360/460?random=8" alt="300*180">
+        <img src="https://picsum.photos/360/460?random=9" alt="300*100">
+        <img src="https://picsum.photos/360/460?random=10" alt="400*300">
+        <img src="https://picsum.photos/360/460?random=11" alt="400*200">
+        <img src="https://picsum.photos/360/460?random=12" alt="300*150">
+        <img src="https://picsum.photos/360/460?random=13" alt="300*250">
+        <img src="https://picsum.photos/360/460?random=14" alt="300*80">
+        <img src="https://picsum.photos/360/460?random=15" alt="300*90">
+        <img src="https://picsum.photos/360/460?random=16" alt="300*120">
+        <img src="https://picsum.photos/360/460?random=17" alt="300*180">
+        <img src="https://picsum.photos/360/460?random=18" alt="300*100">
+        <img src="https://picsum.photos/360/460?random=21" alt="300*150">
+        <img src="https://picsum.photos/360/460?random=22" alt="300*250">
+        <img src="https://picsum.photos/360/460?random=23" alt="300*80">
+        <img src="https://picsum.photos/360/460?random=24" alt="300*90">
+        <img src="https://picsum.photos/360/460?random=25" alt="300*120">
+        <img src="https://picsum.photos/360/460?random=26" alt="300*180">
+        <img src="https://picsum.photos/360/460?random=27" alt="300*100">
+    </div>
+    <script>
+        //  列的数量（容器的宽度除以图片的宽度得出的）
+        var colCount;
+        //  存放每一列的高度的数组
+        var colHeightArray = [];
+        //  每张图片的宽度
+        // 这里只所以用 outerWidth 是因为图片可能会有边框 margin之类的，一并计算进去
+        var imgWidth = $('.waterfall img').outerWidth(true);
+
+        colCount = Math.floor($('.waterfall').width() / imgWidth);
+        console.log("列数:" + colCount);
+
+        //  得到列数之后。对数组进行初始化，每一些的高度初始化为0
+        for (var i = 0; i < colCount; i++) {
+            colHeightArray[i] = 0;
+        }
+
+        console.log("图片高度:" + $('.waterfall img').eq(2).height());
+
+        // 然后开始摆放位置了，但是如果图片还没有加载，那么计算得到的列的宽高是不对的，所以要先确认图片加载
+        $('.waterfall img').on('load', function () {
+            // 我们假设数组里第一个高度值是最小的
+            var minValue = colHeightArray[0];
+            // 最小的高度的下标是0
+            var minIndex = 0
+            // 然后遍历高度数组，找出最小值，如果还有值比minVlue小，就把这个值作为最小值，它的下标作为最小值的下标
+            for (var i = 0; i < colCount; i++) {
+                if (colHeightArray[i] < minValue) {
+                    minValue = colHeightArray[i];
+                    minIndex = i;
+                }
+            }
+            // 给先加载出来的图片设置定位，摆放图片
+            $(this).css({
+                left: minIndex * imgWidth,
+                top: minValue
+            })
+            console.log(minValue);
+
+            // 图片摆放好，这一列的高度就要进行更新了
+            colHeightArray[minIndex] += $(this).outerHeight(true)
+
+        })
+
+
+        // 下边这一部分，是实现了当窗口尺寸发生变化的时候，图片实现重新排列
+        $(window).on('resize', function () {
+            // 每次窗口大小改变以后，列数，跟每列的高度数组，都会发生变化，所以要重新声明
+            var colCount;
+            var colHeightArray = [];
+            // 每次尺寸变化，都要重新计算列数
+            colCount = Math.floor($('.waterfall').width() / imgWidth);
+
+            // 初始化每列的高度
+            for (var i = 0; i < colCount; i++) {
+                colHeightArray[i] = 0;
+            }
+
+            // 因为上边图片已经加载过了，所以直接遍历图片
+            $('.waterfall img').each(function () {
+                var minValue = colHeightArray[0];
+                var minIndex = 0;
+
+                for (var i = 0; i < colCount; i++) {
+                    if (colHeightArray[i] < minValue) {
+                        minValue = colHeightArray[i];
+                        minIndex = i;
+                    }
+                }
+                // 给遍历到的图片设置位置
+                $(this).css({
+                    left: minIndex * imgWidth,
+                    top: minValue
+                })
+                // 设置位置后，更新高度
+                colHeightArray[minIndex] += $(this).outerHeight(true);
+            })
+        })
+
+        $("img").lazyload({
+            placeholder: '',
+            effect: 'fadeIn',
+            threshold: 200,
+            event: "click",
+            container: $("#waterfall"),
+            skip_invisible:true 
+        })
+    </script>
+</body>
+
+</html>
