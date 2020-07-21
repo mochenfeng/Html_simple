@@ -1,0 +1,74 @@
+.wrap {
+    width: 800px;
+    height: 400px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.list {
+    width: 800px;
+    height: 400px;
+    list-style: none;
+    position: relative;
+    padding: 0;
+}
+
+.item {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 1s;
+}
+
+
+.btn {
+    width: 50px;
+    height: 100px;
+    position: absolute;
+    top: 150px;
+    z-index: 100;
+}
+
+#goPre {
+    left: 0px;
+}
+
+#goNext {
+    right: 0px;
+}
+
+.item.active {
+    opacity: 1;
+    z-index: 10;
+    
+}
+
+.pointList {
+    padding-left: 0px;
+    list-style: none;
+    display: flex;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+}
+
+.point {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 100%;
+    margin-right: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+}
+
+.point.active {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+}

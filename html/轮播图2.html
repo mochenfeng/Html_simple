@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图2</title>
+    <link rel="stylesheet" href="../css/轮播图2.css">
+    <script>
+        window.onload = function () {
+            var items = document.getElementsByClassName('item');
+            var goPreBtn = document.getElementById("goPre");
+            var goNextBtn = document.getElementById("goNext");
+            var points = document.getElementsByClassName("point");
+
+            //索引
+            var index = 0
+
+            function clearActive() {
+                for (var i = 0; i < items.length; i++) {
+                    items[i].className = "item";
+                }
+                for (var i = 0; i < points.length; i++) {
+                    points[i].className = "point"
+                }
+            }
+
+            function goIndex() {
+
+                clearActive()
+
+                points[index].className = "point active"
+                items[index].className = "item active"
+            }
+
+            function goNext() {
+                if(index < 3) {
+                    index++;
+                } else {
+                    index = 0
+                }
+                goIndex()
+
+            }
+
+            function goPre() {
+                if(index > 0) {
+                    index--;
+                } else {
+                    index = 3
+                }
+                goIndex()
+            }
+
+            goNextBtn.addEventListener('click', function () {
+                goNext()
+            })
+
+            goPreBtn.addEventListener('click', function() {
+                goPre()
+            })
+
+            for (var i = 0; i < points.length; i++) {
+                    points[i].addEventListener("click", function() {
+                        var pointIndex = this.getAttribute("data-index");
+                        index = pointIndex;
+                        goIndex();
+                    })
+                }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <ul class="pointList">
+            <li class="point active" data-index="0"></li>
+            <li class="point" data-index="1"></li>
+            <li class="point" data-index="2"></li>
+            <li class="point" data-index="3"></li>
+        </ul>
+
+        <ul class="list">
+            <li class="item active"><img src="../images/1.jpg" alt=""></li>
+            <li class="item"><img src="../images/2.jpg" alt=""></li>
+            <li class="item"><img src="../images/3.png" alt=""></li>
+            <li class="item"><img src="../images/4.png" alt=""></li>
+        </ul>
+
+        <button type="button" class="btn" id="goPre"><</button>
+        <button type="button" class="btn" id="goNext">></button>
+
+    </div>
+</body>
+
+</html>

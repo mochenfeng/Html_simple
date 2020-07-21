@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Css轮播图</title>
     <link rel="stylesheet" href="../css/Css轮播图.css">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1908401_43pvve54ymp.css">
-    <script src="../js/move.js"></script>
     <script>
         window.onload = function () {
+            var imgArr = document.getElementsByTagName("img")
+            console.log(imgArr.length)
+
             //索引
             var index = 0
 
@@ -25,31 +27,45 @@
                 selectAll[i].num = i;
 
                 selectAll[i].onclick = function () {
+                    //关闭自动切换的定时器
+                    clearInterval(timer)
 
                     //获取点击的索引
                     index = this.num
                     setA(selectAll[index])
-
+                    
+                    //开启自动切换图片
+                    autoChange()
                 }
 
                 left.onclick = function () {
+                    clearInterval(timer);
                     index--
-                    if(index < 0) {
+                    if (index < 0) {
                         index = 4
                     }
                     setA(selectAll[index])
                     r[index].checked = true
+
+                    autoChange()
                 }
 
                 right.onclick = function () {
+
+                    clearInterval(timer)
                     index++
-                    if(index > 4) {
+                    if (index > 4) {
                         index = 0
                     }
                     setA(selectAll[index])
                     r[index].checked = true
+
+                    autoChange()
                 }
             }
+
+            //开启自动切换图片
+            autoChange()
 
             //创建一个方法用来设置选中
             function setA(obj) {
@@ -61,13 +77,25 @@
                 obj.style.background = "#fff"
             }
 
+            //创建一个函数，用来开启自动切换图片
+            function autoChange() {
+                //开启一个定时器
+                timer = setInterval(function () {
+                    //索引自增
+                    index++;
+                    index %= imgArr.length;
+                    setA(selectAll[index])
+                    r[index].checked = true;
+                }, 4000)
+            }
+
         }
     </script>
 </head>
 
 <body>
-    <div id="auto" class="slidershow middle">
-        <div id="imgList" class="slides">
+    <div class="slidershow middle">
+        <div class="slides">
 
             <input class="r" type="radio" name="r" id="r1" checked>
             <input class="r" type="radio" name="r" id="r2">
